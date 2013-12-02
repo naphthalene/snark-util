@@ -1,7 +1,7 @@
 ## SNARK experiment script suite
 
 TORRENTURL=`cat url.var`
-SHAREMB=`cat sharesize.var` # 10 MB
+SHAREKB=`cat sharesize.var`
 
 hack:
 	@./hack.sh 
@@ -18,7 +18,7 @@ serve:
 	@./serve.sh
 
 sharefile:
-	@dd bs=1024 count=$(SHAREMB) if=/dev/urandom of=sharefile
+	@dd bs=1024 count=$(SHAREKB) if=/dev/urandom of=sharefile
 
 stopcli:
 	@-kill -9 `pgrep -f '^.*snark.jar.*http.*'` > /dev/null

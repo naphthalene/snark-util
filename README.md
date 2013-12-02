@@ -3,14 +3,16 @@ snark-util
 
 Set of scripts for running multiple snarks and tracing their results
 
-# Using the util #
+# Usage #
 
 Initially, you must do the following:
 
 1. Generate the seed file using this command (for a 10 MB file).
 
-    $ echo "10000" > sharesize.var
-    $ make sharefile
+<pre><code>
+$ echo "10000" > sharesize.var # in KB
+$ make sharefile
+</code></pre>
 
 2. Copy the three jars necessary, the should be named:
 
@@ -20,18 +22,18 @@ Initially, you must do the following:
 
 3. Using makefile, execute the following to spawn a seeder, clients and your hacked client
 
-    $ make all
-
+<pre><code>
+make all
+</code></pre>
 
 4. To stop the clients, run:
 
-    $ make stopcli
+<pre><code>
+make stopcli
+</code></pre>
 
 5. To stop the seeder, run:
 
-    $ make stopserv
-
-# Logs and stats #
-
-By default the server
-   
+<pre><code>
+make stopserv
+</code></pre>
