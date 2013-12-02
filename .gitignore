@@ -1,6 +1,6 @@
 test
 logs
 sharefile
-*.var
+url.var
 *.jar
 *~
