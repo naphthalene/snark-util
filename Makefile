@@ -1,7 +1,7 @@
 ## SNARK experiment script suite
 
 TORRENTURL=`cat url.var`
-SHAREMB=10000 # 10 MB
+SHAREMB=`cat sharesize.var` # 10 MB
 
 hack:
 	@./hack.sh 
@@ -26,11 +26,11 @@ stopcli:
 	@ps aux | grep snark
 
 stopserv:
-	@-kill -9 `pgrep -f 'snark-server\.jar.*share 0.0.0.0'` > /dev/null
+	@-kill -9 `pgrep -f 'snark-server\.jar.*share 0.0.0.0'`> /dev/null
 	@sleep 1
 	@ps aux | grep snark
 
 clean:
-	-find test -name sharefile -exec rm {} \;
+	@rm -rf test/*
 
 all: serve multiple hack stat

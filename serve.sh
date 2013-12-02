@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SLOG=logs/server-`date +%d%H%M%S`.log
+SLOG=logs/test/server-`date +%d%H%M%S`.log
 
 java -jar snark-server.jar --no-commands --debug ALL --share 0.0.0.0 sharefile &> $SLOG &
 sleep 2
