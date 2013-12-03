@@ -1,8 +1,15 @@
 #!/bin/bash
 
-LOOPP=true
+function clean_up {
+    echo "----------------------------------------------"
+    echo "----------Don't forget to stop snark! ----------"
+    echo "------------------------------------------------"
+    exit 0
+}
 
-while $LOOPP; do
+trap clean_up SIGHUP SIGINT SIGTERM
+
+while true; do
     printf "`date +%M%S`  "
     for i in `ls -v test`;
     do
@@ -19,6 +26,3 @@ while $LOOPP; do
     sleep 1
 done
 
-echo "------------------------------------------------"
-echo "----------Don't forget to stop snark! ----------"
-echo "------------------------------------------------"

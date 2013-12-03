@@ -7,7 +7,7 @@ hack:
 	@./hack.sh $(TORRENTURL)
 
 multiple:
-	@echo "Spawning clients"
+	@echo "Connecting clients"
 	@./multiple_clients.sh $(TORRENTURL)
 
 stat:
@@ -20,9 +20,11 @@ serve:
 sharefile:
 	@dd bs=1024 count=$(SHAREKB) if=/dev/urandom of=sharefile
 
+stop: stopcli stopserv
+
 stopcli:
 	@-kill -9 `pgrep -f '^.*snark.jar.*http.*'` > /dev/null
-	@sleep 1
+	@pgrep -f '^.*snark.jar.*http.*'; if [ $$? -eq 0 ] ; 
 	@ps aux | grep snark
 
 stopserv:
