@@ -2,16 +2,17 @@
 
 TORRENTURL=`cat url.var`
 SHAREKB=`cat sharesize.var`
+NUMCLI=`cat numcli.var`
 
 hack:
 	@./hack.sh $(TORRENTURL)
 
 multiple:
 	@echo "Connecting clients"
-	@./multiple_clients.sh $(TORRENTURL)
+	@./multiple_clients.sh $(TORRENTURL) $(NUMCLI)
 
 stat:
-	@./statcli.sh $(TORRENTURL)
+	@./statcli.sh $(TORRENTURL) 
 
 serve:
 	@echo "Starting seeder"
@@ -23,14 +24,10 @@ sharefile:
 stop: stopcli stopserv
 
 stopcli:
-	@-kill -9 `pgrep -f '^.*snark.jar.*http.*'` > /dev/null
-	@pgrep -f '^.*snark.jar.*http.*'; if [ $$? -eq 0 ] ; 
-	@ps aux | grep snark
+	@-kill -9 `pgrep -f "snark-(peer|hack)\.jar"` > /dev/null 2>&1 ; if [ $$? -eq 0 ] ; then echo "[CLIE] [STOPPED]"; else echo "[CLIE] [FAILED]"; fi
 
 stopserv:
-	@-kill -9 `pgrep -f 'snark-server\.jar.*share 0.0.0.0'`> /dev/null
-	@sleep 1
-	@ps aux | grep snark
+	@-kill -9 `pgrep -f 'snark-server\.jar.*share 0.0.0.0'` > /dev/null 2>&1 ; if [ $$? -eq 0 ] ; then echo "[SERV] [STOPPED]" ; else echo "[SERV] [FAILED]"; fi
 
 clean:
 	@rm -rf test/*

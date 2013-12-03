@@ -3,7 +3,7 @@ snark-util
 
 Set of scripts for running multiple snarks and tracing their results
 
-# Usage #
+# Initialization #
 
 Initially, you must do the following:
 
@@ -14,11 +14,18 @@ $ echo "10000" > sharesize.var # in KB
 $ make sharefile
 </code></pre>
 
+- Adjust the number of clients in the numcli.var
+  ** Make sure to run `make clean' afterwards **
+
 - Copy the three jars necessary, the should be named:
 
    * snark-server.jar
    * snark-peer.jar
    * snark-hack.jar
+
+
+   
+# Running #
 
 - Using makefile, execute the following to spawn a seeder, clients and your hacked client
 
@@ -26,14 +33,8 @@ $ make sharefile
 make all
 </code></pre>
 
-- To stop the clients, run:
+- To stop the everything, run:
 
 <pre><code>
-make stopcli
-</code></pre>
-
-- To stop the seeder, run:
-
-<pre><code>
-make stopserv
+make stop
 </code></pre>
