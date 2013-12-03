@@ -4,7 +4,7 @@ TORRENTURL=`cat url.var`
 SHAREKB=`cat sharesize.var`
 
 hack:
-	@./hack.sh 
+	@./hack.sh $(TORRENTURL)
 
 multiple:
 	@echo "Spawning clients"
@@ -32,5 +32,8 @@ stopserv:
 
 clean:
 	@rm -rf test/*
+
+cleanlogs:
+	@rm -rf logs/test/*
 
 all: serve multiple hack stat
