@@ -15,7 +15,7 @@ $ make sharefile
 </code></pre>
 
 - Adjust the number of clients in the numcli.var
-  ** Make sure to run `make clean' afterwards **
+  Make sure to run `make clean' afterwards
 
 - Copy the three jars necessary, the should be named:
 
