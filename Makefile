@@ -36,3 +36,4 @@ cleanlogs:
 	@rm -rf logs/test/*
 
 all: serve multiple hack stat
+.PHONY: hack multiple stat serve sharefile stop stopcli stopserv clean cleanlogs
