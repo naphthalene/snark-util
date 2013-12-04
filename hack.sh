@@ -11,4 +11,5 @@ if [ ! -d logs/$TESTD ]; then
 fi
 ln -s $PWD/snark-hack.jar $TESTD/snark-hack.jar &> /dev/null
 rm -f $TESTD/sharefile
-cd $TESTD && java -jar snark-hack.jar --show-peers --no-commands --debug ALL $1 &> $SLOG &
+# --debug ALL 
+cd $TESTD && java -jar snark-hack.jar --show-peers --no-commands $1 &> $SLOG &
