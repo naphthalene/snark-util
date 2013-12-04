@@ -29,6 +29,10 @@ stopcli:
 stopserv:
 	@-kill -9 `pgrep -f 'snark-server\.jar.*share 0.0.0.0'` > /dev/null 2>&1 ; if [ $$? -eq 0 ] ; then echo "[SERV] [STOPPED]" ; else echo "[SERV] [FAILED]"; fi
 
+running:
+	@-pgrep -lf "snark-(peer|hack)\.jar" ; if [ $$? -eq 0 ] ; then echo "[CLIE] [RUNNING]"; else echo "[CLIE] [STOPPED]"; fi
+	@-pgrep -lf 'snark-server\.jar.*share 0.0.0.0' ; if [ $$? -eq 0 ] ; then echo "[SERV] [RUNNING]" ; else echo "[SERV] [STOPPED]"; fi
+
 clean:
 	@rm -rf test/*
 
