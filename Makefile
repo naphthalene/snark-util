@@ -14,6 +14,9 @@ multiple:
 stat:
 	@./statcli.sh $(TORRENTURL) 
 
+statfull:
+	@./statfull.sh $(TORRENTURL)
+
 serve:
 	@echo "Starting seeder"
 	@./serve.sh
@@ -40,4 +43,4 @@ cleanlogs:
 	@rm -rf logs/test/*
 
 all: serve multiple hack stat
-.PHONY: hack multiple stat serve sharefile stop stopcli stopserv clean cleanlogs
+.PHONY: hack multiple stat statfull serve sharefile stop stopcli stopserv running clean cleanlogs
