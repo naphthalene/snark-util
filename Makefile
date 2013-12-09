@@ -7,7 +7,7 @@ DURATION=`cat duration.var`
 TESTD=logs/test/run
 RUNLOG=$(TESTD)/run.log
 
-all: mklog run timer stat
+all: mklog md5jar serve multiple hack timer stat
 
 mklog:
 	@if [ ! -d $(TESTD) ]; then mkdir -p $(TESTD); fi; echo > $(RUNLOG)
@@ -22,11 +22,14 @@ multiple:
 	@echo "Connecting clients"
 	@./multiple_clients.sh $(TORRENTURL) $(NUMCLI)
 
-stat:
-	@-./statcli.sh $(TORRENTURL) | tee -a $(RUNLOG)
+stat: statfull
+#	@-./statcli.sh $(TORRENTURL) 100 | tee -a $(RUNLOG)
 
 timer:
 	@./killtimer.sh $(DURATION) | tee -a $(RUNLOG) &
+
+statfull:
+	@./statcli.sh $(TORRENTURL) | tee -a $(RUNLOG)
 
 serve:
 	@echo "Starting seeder" | tee -a $(RUNLOG)
@@ -52,11 +55,14 @@ stopserv:
 stopstat: 
 	@-kill -9 `pgrep -f 'statcli.sh'` > /dev/null 2>&1 ; if [ "$$?" -eq 0 ] ; then echo "[STAT] [STOPPED]" | tee -a $(RUNLOG); else echo "[STAT] [FAILED]" | tee -a $(RUNLOG); fi
 
+running:
+	@-pgrep -lf "snark-(peer|hack)\.jar" ; if [ $$? -eq 0 ] ; then echo "[CLIE] [RUNNING]"; else echo "[CLIE] [STOPPED]"; fi
+	@-pgrep -lf 'snark-server\.jar.*share 0.0.0.0' ; if [ $$? -eq 0 ] ; then echo "[SERV] [RUNNING]" ; else echo "[SERV] [STOPPED]"; fi
+
 clean:
 	@rm -rf test/*
 
 cleanlogs:
 	@rm -rf logs/test/*
 
-run: md5jar serve multiple hack 
-
+.PHONY: hack multiple stat statfull serve sharefile stop stopcli stopserv running clean cleanlogs
